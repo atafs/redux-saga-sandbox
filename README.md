@@ -34,7 +34,7 @@ Visit `http://localhost:8082` using Chrome
 > obj.next() \
 > obj.next() \
 > obj.next() \
-> obj.next() \
+> obj.next() 
 
 
 > var delayGenerator = function*() {
@@ -53,15 +53,16 @@ Visit `http://localhost:8082` using Chrome
 	console.log('Step 2');
 	let data3 = yield delay(3000);
 	console.log('Step 3');
-
-} \
+}
+ 
 > var obj = delayGenerator() \
 > obj.next() \
 > obj.next() \
 > obj.next() \
 > run(delayGenerator) \
 > var wrapped = co.wrap(delayGenerator) \
-> wrapped().then( v => console.log('Got a value', v) ); \
+> wrapped().then( v => console.log('Got a value', v) ); 
+
 
 
 

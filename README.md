@@ -63,6 +63,135 @@ Visit `http://localhost:8082` using Chrome
 > var wrapped = co.wrap(delayGenerator) \
 > wrapped().then( v => console.log('Got a value', v) ); 
 
+#### Redux Saga Effects : take
+###### Pause in a particular line of code!!
+> `effects.take('MY_ACTION');` 
+
+``` javascript
+let mySaga = function*() { 
+    console.info('Saga begins!!'); 
+    const state = yield effects.take('SET_STATE'); 
+    console.info('Got state...', state);
+}
+```
+
+> `run(mySaga);`
+
+```javascript 
+dispatch({
+    type: "SET_STATE",
+    value: 42
+})
+```
+
+#### Redux Saga Effects : put
+###### Immediately dispatches an action to the rest of the app!!
+
+``` javascript
+let mySaga = function*() { 
+    console.info('Saga begins!!'); 
+    const state = yield effects.take('SET_STATE'); 
+    console.info('Got state...', state);
+}
+```
+
+> `run(mySaga);`
+
+```javascript 
+let putSaga = function*() {
+    yield effects.put({
+        type: 'SET_STATE',
+        value: 42
+    })
+}
+```
+
+> `run(putSaga);`
+
+#### Redux Saga Effects : call
+###### Used to call a method so that it isn't really called during a task!!
+###### More useful in tests.
+
+```javascript 
+let fn = () => {
+    console.log('Called the function!!')
+}
+```
+
+```javascript 
+let callSaga = function*() {
+    yield fn();
+}
+```
+
+> `run(callSaga)`
+
+```javascript 
+callSaga = function*() {
+    yield effects.call(fn);
+}
+```
+#### Redux Saga Effects : fork
+###### Works a lot like call!! But you can't capture the variables that are yielded. It will continue without stopping!!
+
+```javascript 
+function* fn() {
+    while(true) {
+        console.info('FN!');
+        yield delay(1000);
+    }
+}
+```
+
+```javascript 
+let forkSaga = function*() {
+    while(true) {
+        yield effects.fork(fn);
+        yield delay(500);
+    }
+}
+```
+
+> `run(forkSaga)`
+```javascript 
+xxx
+```
+
+```javascript 
+xxx
+```
+
+```javascript 
+xxx
+```
+
+```javascript 
+xxx
+```
+
+```javascript 
+xxx
+```
+
+```javascript 
+xxx
+```
+
+```javascript 
+xxx
+```
+
+```javascript 
+xxx
+```
+
+```javascript 
+xxx
+```
+
+```javascript 
+xxx
+```
 
 
 
